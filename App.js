@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, TouchableWithoutFeedback} from  'react-native';
 const App = () => {
   return (
     <View style={styles.mainView}>
-      <Text style={styles.mainText}> 김형준바보 </Text>
+      <Text style={styles.mainText}> 김형준바보멍청이 </Text>
     </View>
   )
 }
