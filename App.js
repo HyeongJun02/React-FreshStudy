@@ -5,7 +5,7 @@ const App = () => {
 
 return (
   <View style={styles.mainView}> 
-      <Text style={styles.mainText}> 넵</Text> 
+      <Text style={styles.mainText}>이건 과제요</Text> 
     </View>
   )
 }
