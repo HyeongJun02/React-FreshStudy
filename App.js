@@ -7,28 +7,6 @@ import {
   Alert,
 } from 'react-native';
 
-const createThreeButtonAlert = () => {
-  Alert.alert(
-    "Alert 제목",
-    "Alert 내용",
-    [
-      {
-        text: "취소",
-        style: "cancel",
-        onPress: () => console.log("취소..")
-      },
-      {
-        text: "확인",
-        onPress: () => console.log("확인..")
-      },
-      {
-        text: "오잉?",
-        onPress: () => console.log("오잉??")
-      },
-    ]
-  )
-}
-
 const App = () => {
   return (
    <View style={styles.mainView}>
