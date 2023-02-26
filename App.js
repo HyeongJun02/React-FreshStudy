@@ -1,139 +1,145 @@
 import React from 'react';
 import {
-  SafeAreaView,
+  View, 
   Image,
-  StyleSheet,
-  Button,
-  View,
-  Text,
+  SafeAreaView,
+  Text, 
+  StyleSheet, 
   TouchableOpacity,
   Alert,
-} from  'react-native';
+  ImageBackground,
+  Touchable
+ } from 'react-native';
+ 
 
-import img from './image/thisis_logo.png';
-
-const createAlert = () => {
+const createAlert=( name )=>{
   Alert.alert(
-    "Alert 제목",
-    "Alert 내용"
-  )
-}
-
-const createTwoButtonAlert = () => {
-  Alert.alert(
-    "Alert 제목",
-    "Alert 내용",
+    name,
+    name + " 버튼 입니다.",
     [
-      {
-        text: "취소",
-        style: "cancel",
-        onPress: () => console.log("취소..")
-      },
-      {
-        text: "확인",
-        onPress: () => console.log("확인..")
-      }
+      {text: "확인", onPress:()=>console.log("확인 버튼을 눌렀습니다")},
+      {text: "취소",style: "cancel",onPress:()=> console.log("취소 버튼을 눌렀습니다")}
     ]
   )
 }
 
-const createThreeButtonAlert = () => {
-  Alert.alert(
-    "Alert 제목",
-    "Alert 내용",
-    [
-      {
-        text: "취소",
-        style: "cancel",
-        onPress: () => console.log("취소..")
-      },
-      {
-        text: "확인",
-        onPress: () => console.log("확인..")
-      },
-      {
-        text: "오잉?",
-        onPress: () => console.log("오잉??")
-      }
-    ]
-  )
-}
-
-const App = () => {
+const App = () =>{
   return (
-    <SafeAreaView style={styles.f}>
+    <SafeAreaView style={styles.container}>
 
-      <Image source={img} style={styles.img}></Image>
+      <ImageBackground source={require('./image/taeyeop.jpg')} resizeMode='cover' style={styles.imgbackground}>
 
-      <View style={{alignItems: 'center', margin: 10}}>
-        <Text style={{fontSize: 35}}>버튼 클릭</Text>
-      </View>
+        <View style={styles.headerView}>
 
-      <Button 
-        onPress={() => console.log('버튼 클릭됨')}
-        title = 'Button'
-        color = 'gray'
-      />
+          <TouchableOpacity onPress={() => createAlert('취소')}>
+            <Image source={require('./image/cancel.png')} style={styles.img}/>
+          </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={() => console.log('터치 됐음')}
-        style={styles.center}
-      >
-        <Text>눌 러</Text>
-      </TouchableOpacity>
+          <View style={{flexDirection : 'row'}}>
+            <TouchableOpacity onPress={() => createAlert('선물하기')}>
+              <Image source={require('./image/gift.png')} style={styles.headerRightButton}/>
+            </TouchableOpacity>
 
-      <TouchableOpacity
-        style = {[styles.touch, {backgroundColor: 'red'}]}
-        onPress = {createAlert}
-      >
-        <Text style={styles.center}>눌러!!!</Text>
-      </TouchableOpacity>
+            <TouchableOpacity onPress={() => createAlert('QR코드')}>
+              <Image source={require('./image/qr.png')} style={styles.headerRightButton}/>
+            </TouchableOpacity>
 
-      <TouchableOpacity
-        style = {[styles.touch, {backgroundColor: 'green'}]}
-        onPress = {createTwoButtonAlert}
-      >
-        <Text style={styles.center}>확인/취소</Text>
-      </TouchableOpacity>
+            <TouchableOpacity onPress={() => createAlert('설정')}>
+              <Image source={require('./image/setting.png')} style={styles.headerRightButton}/>
+            </TouchableOpacity>
 
-      <TouchableOpacity
-        style = {[styles.touch, {backgroundColor: 'pink'}]}
-        onPress = {createThreeButtonAlert}
-      >
-        <Text style={styles.center}>세개</Text>
-      </TouchableOpacity>
+          </View>
 
+        </View>
 
+        <View style={styles.contentView}>
+
+          <View style={{alignItems : 'center', margin : 10}}>
+            <TouchableOpacity onPress={() => createAlert('프로필 사진')}>
+              <Image source={require('./image/profile.jpg')} style={styles.profileImage}/>
+            </TouchableOpacity>
+            <Text style={{fontSize : 20, marginTop : 10, color : 'white'}}>이태엽</Text>
+          </View>
+
+        </View>
+
+        <View style={styles.footer}>
+
+          <TouchableOpacity onPress={() => createAlert('나와의 채팅')}>
+            <Image source={require('./image/chat.png')} style={styles.footerImg}/>
+            <Text style={styles.footerText}>나와의 채팅</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => createAlert('프로필 편집')}>
+            <Image source={require('./image/pencil.png')} style={styles.footerImg}/>
+            <Text style={styles.footerText}>프로필 편집</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => createAlert('카카오스토리')}>
+            <Image source={require('./image/story.png')} style={styles.footerImg}/>
+            <Text style={styles.footerText}>카카오스토리</Text>
+          </TouchableOpacity>
+
+        </View>
+
+      </ImageBackground>
     </SafeAreaView>
+  
   )
 }
-
-const styles = StyleSheet.create ( { 
-  img: {
-    height: 200,
-    width: 200,
-    resizeMode: 'contain',
-    alignItems: 'center',
+const styles = StyleSheet.create({
+  
+  img:{
+    height: 25,
+    width: 25,
+    justifyContent:'center',
+    resizeMode:'contain'
   },
-
-  f: {
-    flex: 1,
-    //alignItems: 'center'
+  imgbackground:{
+    width:'100%',
+    height:'100%',
+    resizeMode:"cover", 
+    backgroundColor:'skyblue',
   },
-
-  touch: {
-    backgroundColor:"pink",
-    paddingHorizontal: 50,
-    paddingVertical: 20,
-    margin: 20
+  headerView : {
+    flexDirection : 'row',
+    justifyContent : 'space-between',
+    padding : 10
   },
-
-  center: {
-    alignItems: 'center',
-    alignContent: 'center'
+  headerRightButton : {
+    margin : 5,
+    height : 25,
+    width : 25,
+    resizeMode: 'contain'
+  },
+  profileImage : {
+    height : 100,
+    width : 100,
+    borderRadius : 35
+  },
+  contentView : {
+    height : 650,
+    flexDirection : 'column-reverse',
+    alignItems : 'center',
+    borderBottomColor : 'white',
+    borderBottomWidth : 1
+  },
+  footer : {
+    flex : 1, 
+    padding : 10, 
+    justifyContent : 'space-around', 
+    flexDirection : 'row'
+  },
+  footerImg : {
+    width : 20,
+    height : 20,
+    alignSelf : 'center',
+  },
+  footerText : {
+    marginTop : 3,
+    color : 'white'
   }
-})
-
+  
+}
+);
 export default App;
-
-
