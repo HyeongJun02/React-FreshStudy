@@ -7,199 +7,124 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Alert
+  Alert,
+  ImageBackground,
+  Touchable
 } from 'react-native';
 
-import img from './img/logo.png'
+import img from './img/bp.png'
+import xLogo from './img/x.png'
+import presentLogo from './img/present.png'
+import qrLogo from './img/qr.png'
+import preferenceLogo from './img/preference.png'
+import pp from './img/pp.png'
+import chat from './img/chat.png'
+import edit from './img/edit.png'
+import story from './img/story.png'
 
-const createAlert0 = () => {
+const createAlert=( name )=>{
   Alert.alert(
-    "Alert TITLE",
-    "Alert CONTENTS",
+    name,
+    name + " 버튼 입니다.",
     [
-      {
-        text: "cancel",
-        style: "cancel",
-        onPress: () => console.log('Button cancel')
-      },
-      {
-        text: "confirm",
-        onPress: () => console.log('Button confirm')
-      }
+      {text: "확인", onPress:()=>console.log("확인 버튼을 눌렀습니다")},
+      {text: "취소",style: "cancel",onPress:()=> console.log("취소 버튼을 눌렀습니다")}
     ]
-    
   )
 }
 
-const createAlert1 = () => {
-  Alert.alert(
-    "Alert 타이틀",
-    "Alert 내용",
-    [
-      {
-        text: "취소",
-        style: "cancel",
-        onPress: () => console.log('버튼 취소')
-      },
-      {
-        text: "확인",
-        onPress: () => console.log('버튼 확인')
-      }
-    ]
-  )
-}
-const createAlert2 = () => {
-  Alert.alert(
-    "근데",
-    "있잖아",
-    [
-      {
-        text: "근데",
-        style: "cancel",
-        onPress: () => console.log('근데')
-      },
-      {
-        text: "있잖아",
-        onPress: () => console.log('있잖아')
-      }
-    ]
-  )
-}
-const createAlert3 = () => {
-  Alert.alert(
-    "조금",
-    "힘들고",
-    [
-      {
-        text: "조금",
-        style: "cancel",
-        onPress: () => console.log('조금')
-      },
-      {
-        text: "힘들고",
-        onPress: () => console.log('힘들고')
-      }
-    ]
-  )
-}
-const createAlert4 = () => {
-  Alert.alert(
-    "많이",
-    "귀찮은듯 해",
-    [
-      {
-        text: "많이",
-        style: "cancel",
-        onPress: () => console.log('에휴')
-      },
-      {
-        text: "귀찮은듯 해",
-        onPress: () => console.log('후하')
-      }
-    ]
-  )
-}
+
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Image source={img} style={styles.img}></Image>
-      <View style={{alignItems: 'center', margin: 10}}>
-        <Text>글씨</Text>
-      </View>
-      <Button
-        onPress={() => console.log('버튼 클릭됨')}
-        title = "Button"
-        color="#D8CEF6"
-      />
-
-      <TouchableOpacity
-        onPress={()=> console.log("TouchableOpacity")}
-      >
-        <Text>눌러</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={[styles.touch,styles.containerone]}
-        onPress = {createAlert0}
-      >
-      </TouchableOpacity>
-      <View style={styles.trash0}>
-      
-        <TouchableOpacity
-          style= {[styles.touch,styles.containertwo]}
-          onPress = {createAlert1}
-        >
-        </TouchableOpacity>
-        <TouchableOpacity
-          style= {[styles.touch,styles.containerthree]}
-          onPress = {createAlert2}
-        ><TouchableOpacity
-        style= {[styles.touch,styles.containerfour]}
-        onPress = {createAlert3}
-      >
-      </TouchableOpacity>
-      <TouchableOpacity
-        style= {[styles.touch,styles.containerfive]}
-        onPress = {createAlert4}
-      >
-      </TouchableOpacity>
-        </TouchableOpacity>
+      <ImageBackground source={img} style={{width: '100%', height: '100%'}}>
+      <View style={styles.settingView}>
+        <View style={styles.leftView}>
+          <TouchableOpacity  onPress={() => createAlert('취소')}>
+            <Image source={xLogo} style={{width: 20,height: 20,margin:10}}></Image>
+          </TouchableOpacity>
         </View>
+        <View style={styles.rightView}></View>
+          <TouchableOpacity  onPress={() => createAlert('선물하기')}>
+            <Image source={presentLogo} style={{width: 20,height: 20,margin:10}}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => createAlert('QR코드')}>
+            <Image source={qrLogo} style={{width: 20,height: 20,margin:10}}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity  onPress={() => createAlert('설정')}>
+            <Image source={preferenceLogo} style={{width: 20,height: 20,margin:10}}></Image>
+         </TouchableOpacity>
+        </View>
+
+      <View style={styles.profileView}>
+        <View style={styles.topView}>
+          <TouchableOpacity onPress={() => createAlert('프로필 사진')}>
+            <Image source={pp} style={{resizeMode: 'contain',height: 80,width: 80,borderRadius: 25}}></Image>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.bottomView}></View>
+          <TouchableOpacity onPress={() => createAlert('이름')}>
+            <Text style={{margin:20}}>하윤지</Text>
+          </TouchableOpacity>
+      </View>
+      
+      <View style={styles.editView}>
+        <TouchableOpacity  onPress={() => createAlert('나와의 채팅')}>
+          <Image source={chat} style={{width: 20,height: 20,margin:20}}></Image>
+          <Text style={{ color: 'white'}}>나와의 채팅</Text>
+        </TouchableOpacity>
+        <TouchableOpacity  onPress={() => createAlert('프로필 편집')}>
+          <Image source={edit} style={{width: 20,height: 20,margin:20}}></Image>
+          <Text style={{ color: 'white'}}>프로필 편집</Text>
+        </TouchableOpacity>
+        <TouchableOpacity  onPress={() => createAlert('카카오스토리')}>
+          <Image source={story} style={{width: 20,height: 20,margin:20}}></Image>
+          <Text style={{ color: 'white'}}>카카오스토리</Text>
+        </TouchableOpacity>
+
+      </View>
+      </ImageBackground>
     </SafeAreaView>
 )
 }
 
-const styles = StyleSheet.create ({
-  img: {
-    height:208,
-    width:200,
-    resizeMode: 'contain'
-  },
+const styles = StyleSheet.create({
+  
   container: {
-    flex: 1
-  },
-  containerone: {
     flex: 1,
-    backgroundColor: '#F8E0E0',
-    flexDirection: "row"
-
   },
-  trash0: {
+  settingView: {
+    flex: 8,
+    flexDirection: 'row',
+  },
+  leftView:{
     flex: 1,
-    backgroundColor: 'white',
-    flexDirection:"row",
   },
-  containertwo: {
-    flex: 1,
-    backgroundColor: '#A9F5A9'
-  
+  rightView:{
+    flex: 8,
+    flexDirection: 'row'
   },
-  containerthree: {
-    flex: 5, 
-    backgroundColor: '#E0F2F7'
-
-  },
-  trash1: {
-    flex: 1,
-    backgroundColor: 'white',
-    flexDirection:"column"
-  },
-  containerfour: {
+  profileView: {
     flex: 2,
-    backgroundColor: '#F5A9E1'
-  
+    
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection:'column',
+    borderBottomColor : 'white',
+    borderBottomWidth : 0.5
   },
-  containerfive: {
-    flex: 1, 
-    backgroundColor: '#0174DF'
-
+  topView:{
+    flex: 1,
   },
-  touch: {
-    backgroundcolor: 'red',
-    paddingHorizontal: 50,
-    paddingVertical: 20,
-    //margin: 10
+  bottomView:{
+    flex: 1,
+  },
+  editView: {
+    flex: 1.5,
+    justifyContent:'space-around',
+    flexDirection: 'row'
+  },
 
-  }
-})
+ 
+});
 export default App; 
