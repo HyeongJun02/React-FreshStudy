@@ -1,226 +1,130 @@
 import React from 'react';
 import {
-  SafeAreaView,
+  View, 
   Image,
-  StyleSheet,
-  Button,
-  View,
-  Text,
+  SafeAreaView,
+  Text, 
+  StyleSheet, 
   TouchableOpacity,
   Alert,
-} from  'react-native';
+  ImageBackground
+ } from 'react-native';
+ 
 
-import img from './image/logo.png';
+const createAlert=(name)=>{
+  Alert.alert(
+    name,
+    name + "버튼 입니다.",
+    [
+      {text: "확인", onPress:()=>console.log("확인 버튼을 눌렀습니다")},
+      {text: "취소",style: "cancel",onPress:()=> console.log("취소 버튼을 눌렀습니다")}
+    ]
+  )
+}
 
-const App = () => {
+const App = () =>{
   return (
-    <View style={styles.mainView}>
-      <View style={styles.container0}>
-        <View style={styles.subContainer0_0}></View>
-        <View style={styles.subContainer0_1}></View>
-      </View>
-      <View style={styles.container1}>
-        <View style={styles.subContainer1_0}></View>
-        <View style={styles.subContainer1_1}>
-          <View style={styles.subContainer1_1_0}></View>
-          <View style={styles.subContainer1_1_1}></View>
+    <SafeAreaView style={styles.container}>
+      <ImageBackground source={require('./profile/DisisProfile.png')} resizeMode='cover' style={styles.imgbackground}>
+        
+        <View style={styles.MainView}>
+          <TouchableOpacity onPress={()=> createAlert('취소')}>
+            <Image source={require('./profile/cancel.png')} style={styles.img}/>
+          </TouchableOpacity>
+          <View style={{flexDirection:'row'}}>
+            <TouchableOpacity onPress={()=>createAlert('선물하기')}>
+              <Image source={require('./profile/gift.png')} style={styles.HeaderRightButton}/>
+              </TouchableOpacity>
+            <TouchableOpacity onPress={()=>createAlert('QR코드')}>
+              <Image source={require('./profile/QRcode.png')} style={styles.HeaderRightButton}/>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>createAlert('설정')}>
+              <Image source={require('./profile/ediet.png')} style={styles.img}/>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      <View style={styles.container2}>
-        <View style={styles.subContainer2_0}></View>
-        <View style={styles.subContainer2_1}></View>
-        <View style={styles.subContainer2_2}></View>
-      </View>
-    </View>
-  )
-}
-
-const V = () => {
-  Alert.alert(
-    "Alert 제목",
-    "Alert 내용"
-  )
-}
-
-const W = () => {
-  Alert.alert(
-    "Alert 제목",
-    "Alert 내용",
-    [
-      {
-        text: "확인",
-        onPress: () => console.log("확인")
-      },
-      {
         
-        text: "취소",
-        style: "cancel",
-        onPress: () => console.log("취소")
-      }
-    ]
-  )
-}
-
-const R = () => {
-  Alert.alert(
-    "Alert 제목",
-    "Alert 내용",
-    [
-      {
-        text: "확인",
-        onPress: () => console.log("확인")
-      },
-      {
-        
-        text: "취소",
-        style: "cancel",
-        onPress: () => console.log("취소")
-      },
-      {
-        text: "되돌아가기",
-        onPress: () => console.log("되돌아가기")
-      }
-    ]
-  )
-}
-
-const App = () => {
-  return (
-    <SafeAreaView style={styles.f}>
-
-      <Image source={img} style={styles.img}></Image>
-
-      <View style={{alignItems: 'center', margin: 10}}>
-        <Text>버튼 클릭</Text>
-      </View>
-
-      <Button 
-        onPress={() => console.log('버튼 클릭 됨')}
-        title = 'Button'
-        color = 'skyblue'
-      />
-
-      <TouchableOpacity
-        onPress={() => console.log('클릭 됨')}
-        style={styles.center}
-      >
-        <Text>눌러</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style = {[styles.touch, {backgroundColor: 'red'}]}
-        onPress = {V}
-      >
-        <Text>눌러!</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style = {[styles.touch, {backgroundColor: 'orange'}]}
-        onPress = {W}
-      >
-        <Text style={styles.center}>눌러!!</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style = {[styles.touch, {backgroundColor: 'yellow'}]}
-        onPress = {R}
-      >
-        <Text style={styles.center}>눌러!!!</Text>
-      </TouchableOpacity>
-
-
+        <View style={styles.contentView}>
+          <View style={{alignItems:"center",margin:10}}>
+            <TouchableOpacity onPress={()=>createAlert('프로필 사진')}>
+              <Image source={require('./profile/DisisProfile.png')} style={styles.ProfileImg}/>
+            </TouchableOpacity>
+            <Text style={{fontSize: 20, marginTop:10}}>진예운</Text>
+          </View>
+        </View>
+        <View style={styles.Bottom}>
+          <TouchableOpacity onPress={() => createAlert('나와의 채팅')}>
+            <Image source={require('./profile/chat.png')} style={styles.bottomImg}/>
+            <Text style={styles.bottomText}>나와의 채팅</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => createAlert('프로필 편집')}>
+            <Image source={require('./profile/ediet.png')} style={styles.bottomImg}/>
+            <Text style={styles.bottomText}>프로필 편집</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => createAlert('카카오스토리')}>
+            <Image source={require('./profile/kakaostory.png')} style={styles.bottomImg}/>
+            <Text style={styles.bottomText}>카카오스토리</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     </SafeAreaView>
+  
   )
 }
+const styles = StyleSheet.create({
+  
+  
 
-const styles = StyleSheet.create ( { 
-  img: {
-    height: 200,
-    width: 200,
-    resizeMode: 'contain',
-    alignItems: 'center',
+  img:{
+    height: 25,
+    width: 25,
+    justifyContent:'center',
+    resizeMode:'contain'
   },
-
-  f: {
-    flex: 1,
-    //alignItems: 'center'
+  imgbackground:{
+    width:'100%',
+    height:'100%',
+    resizeMode:"cover",
+    backgroundColor:'skyblue'
   },
-
-  touch: {
-    backgroundColor:"pink",
-    paddingHorizontal: 50,
-    paddingVertical: 20,
-    margin: 20
+  MainView:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    padding: 10
   },
-
-  center: {
-    alignItems: 'center',
-    alignContent: 'center'
+  HeaderRightButton : {
+    margin : 5,
+    height : 25,
+    width : 25,
+    resizeMode: 'contain'
   },
-  container0: {
-    flex: 1,
-  flexDirection: 'row'
- },
-subContainer0_0: {
-  flex: 2,
-  backgroundColor: 'black'
-},
-subContainer0_1: {
-  flex: 3,
-  backgroundColor: 'blue'
-},
-
- container1: {
-    flex: 2,
-  flexDirection: 'column'
- },
-subContainer1_0: {
-  flex: 2,
-  backgroundColor: 'white'
-},
-subContainer1_1: {
-  flex: 6,
-  backgroundColor: 'orange',
-  flexDirection: 'row'
-},
-subContainer1_1_0: {
-  flex: 3,
-  backgroundColor: 'pink'
-},
-subContainer1_1_1: {
-  flex: 5,
-  backgroundColor: 'purple'
-},
-
- container2: {
-    flex: 1,
-  flexDirection: 'row'
- },
-subContainer2_0: {
-  flex: 2,
-  backgroundColor: 'yellow'
-},
-subContainer2_1: {
-  flex: 3,
-  backgroundColor: 'green'
-},
-subContainer2_2: {
-  flex: 3,
-  backgroundColor: 'lightgreen'
-},
-
-mainView: {
-  backgroundColor: 'pink',
-  flex: 1,
-  //alignItems: 'center', // 좌우 정렬
-  //justifyContent: 'center' // 상하 정렬
-},
-mainText: {
-  //backgroundColor: 'red',
-  //color: 'white',
-  fontSize: 30
+  ProfileImg:{
+    height:100,
+    width: 100,
+    borderRadius : 35
+  },
+  contentView : {
+    height : 600,
+    flexDirection : 'column-reverse',
+    alignItems : 'center',
+    borderBottomColor : 'white',
+    borderBottomWidth : 1
+  },
+  Bottom : {
+    flex : 1, 
+    padding : 10, 
+    justifyContent : 'space-around', 
+    flexDirection : 'row'
+  },
+  bottomImg : {
+    width : 35,
+    height : 35,
+    alignSelf : 'center',
+  },
+  bottomText : {
+    marginTop : 3,
+    color : 'white'
+  }
 }
-})
-
+);
 export default App;
-
