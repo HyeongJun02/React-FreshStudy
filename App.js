@@ -64,7 +64,7 @@ const App = () => {
         </View>
         <View style={styles.bottomView}></View>
           <TouchableOpacity onPress={() => createAlert('이름')}>
-            <Text style={{margin:20}}>하윤지</Text>
+            <Text style={{margin:20}}>하윤지하윤지</Text>
           </TouchableOpacity>
       </View>
       
