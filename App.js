@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import {View, Text, StyleSheet, 
   TouchableOpacity,
   ScrollView,
@@ -46,41 +46,50 @@ const DATA = {
 	]
 }
 
-const scrollContent = ({name, url, mainColor}) => {
+const ScrollContent = ({children, url, mainColor}) => {
   return (
-  <TouchableOpacity onPress={() => Linking.openURL(url)} style={{backgroundColor: `${mainColor}`}}>
-    <Text>Go To + {name}</Text>
+  <TouchableOpacity onPress={() => Linking.openURL(url)} style={[styles.contentView, {backgroundColor: `${mainColor}`}]}>
+    <Text style={{fontSize : 20}}>Go To {children}</Text>
   </TouchableOpacity>
   )
 }
 
 const App = () => {
-  return (
-    <SafeAreaView style={{flex : 1}}>
-      <View>
-        <Text>검색엔진모음</Text>
-      </View>
-      <ScrollView>
-        <scrollContent url={DATA.page[0].url} mainColor={DATA.page[0].mainColor}>{DATA.page[0].name}</scrollContent>
-      </ScrollView>
-
-    </SafeAreaView>
-  )
+	return (
+		<SafeAreaView style={{flex : 1}}>
+		<View style={styles.header}>
+			<Text style={styles.headerText}>검색 엔진 모음</Text>
+		</View>
+		<ScrollView>
+			{
+				DATA.page.map((pageList, idx) => {
+					return (
+						<ScrollContent url={pageList.url} mainColor={pageList.mainColor}>{pageList.name}</ScrollContent>
+					)
+				})
+			}
+		</ScrollView>
+	</SafeAreaView>
+	)
 }
 
 const styles = StyleSheet.create ( { 
-  mainView: {
-    backgroundColor: 'yellow', 
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	header : {
+		alignItems : 'center',
+		margin : 30
+	},
 
-  mainText: {
-    backgroundColor: 'pink',
-    color: 'gray',
-    fontSize: 30,
-  }
+	headerText : {
+		fontSize : 50
+	},
+	contentView : {
+		height : 80,
+		padding : 30,
+		borderRadius : 25,
+		margin : 30,
+		alignItems : 'center'
+		
+	}
 })
 
 export default App;
