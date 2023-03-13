@@ -42,14 +42,15 @@ const renderItem = ({item}) => {
     </View>
   )
 }
+
 const App = () =>{
   return (
     <SafeAreaView style ={{flex:1, backgroundColor: 'gray'}}>
       <View style = {styles.title}>
-          <TouchableOpacity onPress = {() => createAlert("뒤로가기")}>
-            <Image source = {require("./image/cancel.png")} style = {styles.img}/>
-          </TouchableOpacity>
-          <Text style ={{fontSize : 20}}>    KakaoChat</Text>
+        <TouchableOpacity onPress = {() => createAlert("뒤로가기")}>
+          <Image source = {require("./image/cancel.png")} style = {styles.img}/>
+        </TouchableOpacity>
+        <Text style ={{fontSize : 20}}>    KakaoChat</Text>
       </View>
         
       <View style = {styles.header}>
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    margin: 3
+    margin: 3,
   },
 
   containerIcon: {
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
     width: 20,
     flex: 1,
     flexDirection: 'row',
-    resizeMode: 'contain',
+    justifyContent: 'flex-end',
     margin: 4
   },
 
