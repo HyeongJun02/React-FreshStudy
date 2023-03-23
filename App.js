@@ -1,69 +1,91 @@
 import React from 'react';
-import {
- SafeAreaView,
- Text,
- ScrollView,
- Linking,
- TouchableOpacity,
- View,
- StyleSheet,
- Alert,
- Image,
+import { 
+    SafeAreaView, 
+    Text, 
+    FlatList,
+    Linking,
+    TouchableOpacity,
+    View,
+    StyleSheet, 
+    Alert,
+    Image,
+    StatusBar,
 } from 'react-native';
 
-const DATA = {
-	"page": [
-		
-		{
-			"name": "NAVER",
-			"url": "https://www.naver.com/",
-			"mainColor": "yellowgreen"
-		},
-    ],
-    "IDcard": [
-        
-            {
-                name: "진예운",
-                Message: "화이팅",
-                date: "어제"
-            },
-            {
-                name: "정주영",
-                Message: "열심히 하겠습니다!",
-                date: "20:28"
-            },
-            {
-                name: "이태엽",
-                Message: "과제 다했니?",
-                date: "3월 10일"
-            },
-            {
-                name: "하윤지",
-                Message: "잘부탁해",
-                date: "19:20"
-            },
-            {
-                name: "친구1",
-                Message: "메롱",
-                date: "19:08"
-            },
-            {
-                name:"동생",
-                Message:"밥 먹자",
-                date:"20:30"
-            },
-            {
-                name:"친구2",
-                Message:"ㅋㅋㅋ",
-                date:"21.50"
-            },
-            {
-                name:"친구3",
-                Message:"뭐하냐 ㅋㅋㅋㅋㅋㅋ",
-                date:"22.10"
-            }
-        ]
-} 
+const DATA = [
+    {
+        id:1,
+        title: "진예운",
+        Message: "화이팅",
+        date: "어제"
+    },
+    {   
+        id:2,
+        title: "정주영",
+        Message: "열심히 하겠습니다!",
+        date: "20:28"
+    },
+    {
+        id:3,
+        title: "이태엽",
+        Message: "과제 다했니?",
+        date: "3월 10일"
+    },
+    {
+        id:4,
+        title: "하윤지",
+        Message: "잘부탁해",
+        date: "19:20"
+    },
+    {
+        id:5,
+        title: "친구1",
+        Message: "메롱",
+        date: "19:08"
+    },
+    {
+        id:6,
+        title:"동생",
+        Message:"밥 먹자",
+        date:"20:30"
+    },
+    {
+        id:7,
+        title:"친구2",
+        Message:"ㅋㅋㅋ",
+        date:"21:30"
+    },
+    {
+        id:8,
+        title:"친구3",
+        Message:"ㅋㅋㅋㅋ",
+        date:"22:30"
+    },
+    {
+        id:9,
+        title:"친구4",
+        Message:"ㅋㅋㅋㅋ",
+        date:"19:30"
+    },
+    {
+        id:10,
+        title:"엄마",
+        Message:"밥먹자 나와라",
+        date:"18:30"
+    },
+    {
+        id:11,
+        title:"아빠",
+        Message:"집 가고있다",
+        date:"18:30"
+    },
+    {
+        id:12,
+        title:"친구7",
+        Message:"과제 하기싫다",
+        date:"24:30"
+    },
+];
 
 const createAlert=(name)=>{
     Alert.alert(
@@ -78,31 +100,24 @@ const createAlert=(name)=>{
 const createAlert1=(name)=>{
     Alert.alert(
         name,
-        name + "님과의 채팅 버튼 입니다.",
+        name + " 님과의 채팅 버튼 입니다.",
         [
             {text:"확인",onPress:()=>console.log("확인 버튼을 눌렀습니다")},
             {text:"취소", style:"cancel",onPress:()=>console.log("취소 버튼을 눌렀습니다")}
         ]
     )
 }
-
-const Ttext = ({children,color})=>{
-    return (
-        <View style={[styles.Container,{backgroundColor:`${color}`}]}>
-            <Text style={styles.Ttext}>{children}</Text>
-        </View>
-    )
-}
+const url="https://www.naver.com"
 
 const App = () => {
   return (
-    <SafeAreaView style={{flex:1,justifyContent:'center',alignContent:'center'}}>
+      <SafeAreaView style={{flex:1,justifyContent:'center',alignContent:'center'}}>
         <View style={styles.Headerview}>
-            <Text style={styles.word}>Kakaochat</Text>
+            <Text style={{fontWeight:'900',color:'black',fontSize:30,textAlign:'center'}}>Kakaochat</Text>
         </View>
             
         <View style={styles.MainView}>
-            <Text style={styles.word2}>채팅</Text>
+            <Text style={{ flex:1,fontSize:25,color:'black',fontWeight:'450'}}>채팅</Text>
             <View style={{flexDirection:'row'}}>
                 <TouchableOpacity onPress={()=>createAlert('검색하기')}>
                     <Image source={require('./Img/search.png')} style={styles.img}/>
@@ -118,94 +133,84 @@ const App = () => {
                 </TouchableOpacity>
             </View>
         </View>
-
-         <View style={styles.contentView}>
-            <ScrollView>
-                <TouchableOpacity onPress={()=>Linking.openURL(DATA.page[0].url)}>
-                     <Ttext color={(DATA.page[0].mainColor)}>광고배너</Ttext>
-                </TouchableOpacity>
-
-                {DATA.IDcard.map(item=>{
-                    return(
-                        <TouchableOpacity onPress={()=>createAlert1(item.name)} style={styles.SubView}>
-                        <Text style={{fontSize:15,textAlign:'right'}}>{item.date}</Text>
-                        <View style={styles.SubView2}>
-                            <Image source={require("./Img/Disislogo.png")} style={styles.img2}/>
-                            <View>
-                                <Text style={{fontSize:15,margin:2,color:'black'}}>{item.name}</Text>
-                                <Text style={{fontSize:15,margin:2,color:'black'}}>{item.Message}</Text>
-                            </View>
-                        </View>
+        <View style={styles.contentView}>
+            <FlatList
+            ListHeaderComponent={
+                <View>
+                    <TouchableOpacity onPress={()=>Linking.openURL(url)}>
+                     <Text style={{backgroundColor:"gray",color:'white',textAlign:'center',borderRadius:15,fontSize:20}}>광고배너</Text>
+                    </TouchableOpacity>
+                </View>
+                }
+            data={DATA} 
+            renderItem={({item})=>(
+                <View style={{flexDirection:'row'}}>
+                  <Image source={require('./Img/Disislogo.png')} style={{height:55,width:55,borderRadius:15,margin:10,}}/>
+                    <View style={{flexDirection:'column',margin:5,alignContent:'space-between'}}>
+                        <TouchableOpacity onPress={()=>createAlert1(item.title)}>
+                            <Text style={styles.itemTitleText}>{item.title}</Text>
                         </TouchableOpacity>
-                    )
-                })}
-            </ScrollView>
+                        <Text style={styles.itemMessageText}>{item.Message}</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.itemDateText}>{item.date}</Text>
+                    </View>
+                </View>
+                )}
+                keyExtractor={item => item.id}/>
         </View>
     </SafeAreaView>
-   
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-    HeaderView:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        padding: 10,
-    },
-    MainView : {
-        flexDirection : 'row',
-        alignItems : 'center',
-        borderBottomColor : 'black',
-        borderBottomWidth : 1
-    },
-    contentView:{
-        flex: 12,
-        margin:10,
-    },
-    img:{
-        height: 25,
-        width: 25,
-        justifyContent:'center',
-        resizeMode:'contain'
-    },
-    img2:{
-        height:55,
-        width:55,
-        borderRadius:15, 
-        margin:5
-    },
-    word:{
-        fontWeight:'900',
-        color:'black',
-        fontSize:30,
-        textAlign:'center',
-    },
-    word2:{
-        flex:1,
-        fontSize:25,
-        color:'black',
-        fontWeight:'450',
-    },
-    SubView:{
-        borderRadius: 20, 
-        padding: 10
-    },
-    SubView2:{
-        borderRadius: 25, 
-        flexDirection:"row"
-    },
-    Container:{
-        borderRadius:20,
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    Ttext:{
-        fontSize:25,
-        marginVertical:10,
-        marginHorizontal:20,
-        color:'black'
-    }
-    }
-)
+HeaderView:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    padding: 10
+},
+MainView : {
+    flexDirection : 'row',
+    alignItems : 'center',
+    borderBottomColor : 'black',
+    borderBottomWidth : 1
+},
+contentView:{
+    flex: 12,
+    borderRadius:15,
+    margin:10,
+},
+container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+},
+item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+},
+img:{
+    height: 25,
+    width: 25,
+    justifyContent:'center',
+    resizeMode:'contain'
+},
+itemTitleText:{
+    fontSize:25,
+    fontWeight:'450',
+    color:'black'
+},
+itemMessageText:{
+    fontSize:18,
+    color:'black'
+},
+itemDateText:{
+    padding:10,
+    textAlign:'right',
+    fontSize:18,
+    color:'black'
+}
+});
 
 export default App;
