@@ -207,12 +207,21 @@ const renderItem = ({item}) => {
   return (
     
     <TouchableOpacity onPress={() => createAlert1(item.title)} style={{ borderRadius: 20, padding: 10}} >
-    <Text style={{ fontSize:12, textAlign:"right"}}>{item.date}</Text>
+    
     <View style={{borderRadius: 25, flexDirection:"row"}}>
-      <Image source={thisislogo} style={{height: 55,width: 55,borderRadius: 15, margin:5}}></Image>
-      <View style={{}}>
-        <Text style={{ fontSize:22, margin:3}}>{item.title}</Text>
-        <Text style={{ fontSize:13,margin:3}}>{item.description}</Text>
+      <Image source={thisislogo} style={{height: 60,width: 60,borderRadius: 15, margin:5}}></Image>
+      <View style={{flex: 5, flexDirection: 'row'}}>
+      <View style={{flex: 4}}>
+
+       
+        <Text style={{ fontSize:22, margin:2}}>{item.title}</Text>
+        <Text style={{ fontSize:13,margin:1}}>{item.description}</Text>
+      </View>
+      <View style={{flex: 1, alignItems: 'flex-end'}}>
+          
+      <Text style={{ fontSize:12}}>{item.date}</Text>
+       
+      </View>
       </View>
     </View>
     </TouchableOpacity>
@@ -244,11 +253,14 @@ const App = () => {
             <Image source={setting} style={{width: 20,height: 20,margin:10}}></Image>
          </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => Linking.openURL(url)} style={{backgroundColor: '#E6E6E6', borderRadius: 20, padding: 20}}>
-       <Text style={{fontSize: 20, textAlign: 'center'}}>광고 배너</Text>
-     </TouchableOpacity>
+      
       <View style={styles.profileView}>
         <FlatList
+        ListHeaderComponent={
+          <TouchableOpacity onPress={() => Linking.openURL(url)} style={{backgroundColor: '#E6E6E6', borderRadius: 20, padding: 20}}>
+       <Text style={{fontSize: 20, textAlign: 'center'}}>광고 배너</Text>
+     </TouchableOpacity>}
+          
 
         data = {DATA}
         renderItem = {renderItem}
