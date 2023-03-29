@@ -76,11 +76,12 @@ const App = () =>{
 
       </View>
 
-      <TouchableOpacity onPress={() => Linking.openURL(url)} style ={styles.ad}>
-        <Text style = {styles.text}>광고배너</Text>
-      </TouchableOpacity>
-
       <FlatList
+        ListHeaderComponent = { 
+            <TouchableOpacity onPress={() => Linking.openURL(url)} style = {styles.ad}>
+              <Text style = {styles.text}>광 고 배 너</Text>
+            </TouchableOpacity>
+        }
         data = {DATA}
         renderItem = {renderItem}
         keyExtractor = {(item) => String(item.id)}
