@@ -1,16 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-
+import CalendarView from './CalendarView';
 
 function IntroduceScreen() {
     return (
         <View>
+            <CalendarView/>;
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    block : {},
-});
 
 export default IntroduceScreen;
