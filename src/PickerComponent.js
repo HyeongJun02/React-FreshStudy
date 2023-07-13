@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import { SafeAreaView, SafeAreaViewProps, Text } from "react-native-safe-area-context";
 import { Picker } from "@react-native-picker/picker";
 
-const PickerComponent = () => {
+function PickerComponent() {
     const [pickerValue, setPickerValue] = useState("1");
 
     return ( 
@@ -21,3 +21,5 @@ const PickerComponent = () => {
         </SafeAreaView>
     )
 }
+
+export default PickerComponent;
