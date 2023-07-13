@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import MainScreen from './components/MainScreens';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigation from './navigations/Tab';
 
-const AppStackNavigator = createStackNavigator({
-  Main:{
-    screen: MainScreen // MainScreen 컴포넌트를 네비게이터에 등록
-  }
-});
+const App = () => {
+    return (
+        <NavigationContainer>
+            <TabNavigation />
+        </NavigationContainer>
+    )
+}
 
-export default createAppContainer(AppStackNavigator);
+export default App;
