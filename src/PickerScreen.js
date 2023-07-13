@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import { SafeAreaView, SafeAreaViewProps, Text, View } from "react-native-safe-area-context";
 import RNPickerSelect from 'react-native-picker-select';
 
-export default function PickerScreen() {
+function PickerScreen() {
     return (
         <View>
              <RNPickerSelect
@@ -14,16 +14,8 @@ export default function PickerScreen() {
                 ]}
             />
         </View>
-  );
+    );
 }
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingTop: 20,
-      marginBottom: 200,
-      alignItems: 'center',
-    },
-});
 
 export default PickerScreen;
