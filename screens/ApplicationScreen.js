@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select';
 import { FullWindowOverlay } from 'react-native-screens';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import PickerScreen from './PickerScreen';
 
 Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";
@@ -32,17 +33,6 @@ String.prototype.zf = function(len){return "0".string(len - this.length) + this;
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 
 function ApplicationScreen() {
-    <View>
-        <RNPickerSelect
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'Football', value: 'football' },
-                { label: 'Baseball', value: 'baseball' },
-                { label: 'Hockey', value: 'hockey' },
-            ]}
-        />
-    </View>
-    
     const placeholder = "날짜를 입력해주세요";
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -64,6 +54,16 @@ function ApplicationScreen() {
 
     return (
         <View style={styles.container}>
+            
+             <RNPickerSelect
+                onValueChange={(value) => console.log(value)}
+                items={[
+                    { label: 'Football', value: 'football' },
+                    { label: 'Baseball', value: 'baseball' },
+                    { label: 'Hockey', value: 'hockey' },
+                ]}
+            />
+            
             <TouchableOpacity onPress={showDatePicker}>
                 <TextInput
                     pointerEvents="none"
