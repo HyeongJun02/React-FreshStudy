@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import { SafeAreaView, SafeAreaViewProps, Text } from "react-native-safe-area-context";
+import { SafeAreaView, SafeAreaViewProps, Text, View } from "react-native-safe-area-context";
 import { Picker } from "@react-native-picker/picker";
 
 function PickerComponent() {
