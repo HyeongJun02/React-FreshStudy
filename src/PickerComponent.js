@@ -19,7 +19,7 @@ function PickerComponent() {
             	<Text>{pickerValue}</Text>
             </View>
         </SafeAreaView>
-    )
+    );
 }
 
 export default PickerComponent;
