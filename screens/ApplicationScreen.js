@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import PickerComponent from '../src/PickerComponent';
 
 function ApplicationScreen() {
     return (
-        <View style = {styles.block} />
+        <PickerComponent />
     )
 }
 
