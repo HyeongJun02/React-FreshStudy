@@ -1,10 +1,19 @@
 import React from 'react';
 import { View } from 'react-native';
-import PickerScreen from '../src/PickerScreen';
+import RNPickerSelect from 'react-native-picker-select';
 
 function ApplicationScreen() {
     return (
-        <PickerScreen />
+        <View>
+             <RNPickerSelect
+                onValueChange={(value) => console.log(value)}
+                items={[
+                    { label: 'Football', value: 'football' },
+                    { label: 'Baseball', value: 'baseball' },
+                    { label: 'Hockey', value: 'hockey' },
+                ]}
+            />
+        </View>
     )
 }
 
