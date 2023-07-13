@@ -4,7 +4,9 @@ import PickerComponent from '../src/PickerComponent';
 
 function ApplicationScreen() {
     return (
-        <PickerComponent />
+        <View>
+            <PickerComponent />
+        </View>
     )
 }
 
