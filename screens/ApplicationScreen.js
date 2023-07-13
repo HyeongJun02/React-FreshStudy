@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import PickerComponent from '../src/PickerComponent';
+import PickerScreen from '../src/PickerScreen';
 
 function ApplicationScreen() {
     return (
         <View>
-            <PickerComponent />
+            <PickerScreen />
         </View>
     )
 }
