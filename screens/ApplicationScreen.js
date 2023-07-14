@@ -1,109 +1,70 @@
-import React, {useState} from 'react'
-import { View, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
-import RNPickerSelect from 'react-native-picker-select';
-import { FullWindowOverlay } from 'react-native-screens';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import React, { useState } from 'react';
+import { View, StyleSheet, Button } from 'react-native';
 import PickerScreen from './PickerScreen';
-
-Date.prototype.format = function(f) {
-    if (!this.valueOf()) return " ";
- 
-    var weekName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-    var d = this;
-     
-    return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
-        switch ($1) {
-            case "yyyy": return d.getFullYear();
-            case "yy": return (d.getFullYear() % 1000).zf(2);
-            case "MM": return (d.getMonth() + 1).zf(2);
-            case "dd": return d.getDate().zf(2);
-            case "E": return weekName[d.getDay()];
-            case "HH": return d.getHours().zf(2);
-            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2);
-            case "mm": return d.getMinutes().zf(2);
-            case "ss": return d.getSeconds().zf(2);
-            case "a/p": return d.getHours() < 12 ? "오전" : "오후";
-            default: return $1;
-        }
-    });
-};
- 
-String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
-String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
-Number.prototype.zf = function(len){return this.toString().zf(len);};
+import DateScreen from './DateScreen';
 
 function ApplicationScreen() {
-    const placeholder = "날짜를 입력해주세요";
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedDistrict, setSelectedDistrict] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
 
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [text, onChangeText] = useState("");
-    
-    const showDatePicker = () => {
-        setDatePickerVisibility(true);
-    };
+  const handleCityChange = (city) => {
+    setSelectedCity(city);
+  };
 
-    const hideDatePicker = () => {
-        setDatePickerVisibility(false);
-    };
+  const handleDistrictChange = (district) => {
+    setSelectedDistrict(district);
+  };
 
-    const handleConfirm = (date) => {
-        console.warn("dateFormat: ", date.format("yyyy/MM/dd"));
-        hideDatePicker();
-        onChangeText(date.format("yyyy/MM/dd"))
-    };
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
-    return (
-        <View style={styles.container}>
-            
-             <RNPickerSelect
-                onValueChange={(value) => console.log(value)}
-                items={[
-                    { label: 'Football', value: 'football' },
-                    { label: 'Baseball', value: 'baseball' },
-                    { label: 'Hockey', value: 'hockey' },
-                ]}
-            />
-            
-            <TouchableOpacity onPress={showDatePicker}>
-                <TextInput
-                    pointerEvents="none"
-                    style={styles.textInput}
-                    placeholder={placeholder}
-                    placeholderTextColor='#000000'
-                    underlineColorAndroid="transparent"
-                    editable={false}
-                    value={text}
-                />
-                <DateTimePickerModal
-                    headerTextIOS={placeholder}
-                    isVisible={isDatePickerVisible}
-                    mode="date"
-                    onConfirm={handleConfirm}
-                    onCancel={hideDatePicker}
-                />
-            </TouchableOpacity>
-        </View>
+  const handleSendData = () => {
+    // 선택된 값들을 서버로 전송
+    saveDataToServer(selectedCity, selectedDistrict, selectedDate).then(response => {
+      // 서버 응답 처리
+      console.log('서버 응답:', response);
+      // 서버의 응답에 따라 추가적인 동작 수행 가능
+    }).catch(error => {
+      // 에러 처리
+      console.error('서버 요청 실패:', error);
+    });
+  };
+
+  const saveDataToServer = (city, district, date) => {
+    // 서버로 전송하는 로직을 구현하세요.
+    // 예시로 setTimeout을 사용하여 1초 후에 결과를 반환하는 가상의 비동기 함수입니다.
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const serverResponse = {
+          success: true,
+          message: '데이터가 서버에 전송되었습니다.',
+        };
+        resolve(serverResponse);
+      }, 1000);
+    });
+  };
+
+  return (
+    <View style={styles.block}>
+      <PickerScreen onCityChange={handleCityChange} onDistrictChange={handleDistrictChange} />
+      <DateScreen onDateChange={handleDateChange} />
+
+      <Button title="데이터 전송" onPress={handleSendData} />
+    </View>
   );
 }
 
-const styles = StyleSheet.create({ 
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-    },
-    textInput: {
-        fontSize: 16,
-        color: '#000000',
-        height: 50, 
-        width: 300, 
-        borderColor: '#000000', 
-        borderWidth: 1, 
-        borderRadius: 12,
-        padding: 10
-    }
-})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
 
+  block: {},
+});
 
 export default ApplicationScreen;

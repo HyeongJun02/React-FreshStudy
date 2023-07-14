@@ -8,10 +8,10 @@ const Tab = createBottomTabNavigator();
 
 function MainTab() {
     return (
-        <Tab.Navigator>
-            <Tab.Screen name="Introduce" component={IntroduceScreen}/>
-            <Tab.Screen name="Application" component={ApplicationScreen}/>
-            <Tab.Screen name="My" component={MyScreen}/>
+        <Tab.Navigator initialRouteName={ApplicationScreen}>
+            <Tab.Screen name="소개공간" component={IntroduceScreen}/>
+            <Tab.Screen name="파쇄 신청" component={ApplicationScreen}/>
+            <Tab.Screen name="내 정보" component={MyScreen}/>
         </Tab.Navigator>
     );
 }
